@@ -7,6 +7,8 @@ using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Serilog.Sinks.Elasticsearch;
 using System.Text.RegularExpressions;
+using KiBoards.Managment;
+using KiBoards.Management.Service.Services.Kibana;
 
 // Create web application builder
 var builder = WebApplication.CreateBuilder(args);
@@ -62,6 +64,9 @@ builder.Services.AddControllers()
 
 // Add http client
 builder.Services.AddHttpClient();
+
+builder.Services.AddHttpClient<KibanaHttpClient>(client => client.BaseAddress = new Uri("http://localhost:5601"));
+builder.Services.AddHostedService<KibanaClientHostedService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

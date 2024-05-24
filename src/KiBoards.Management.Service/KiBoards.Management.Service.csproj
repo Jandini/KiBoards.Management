@@ -31,4 +31,14 @@
 		<Folder Include="Controllers\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\KiBoards.Management\KiBoards.Management.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Test.ndjson">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
