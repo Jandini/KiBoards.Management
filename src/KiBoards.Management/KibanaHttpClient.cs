@@ -34,6 +34,8 @@ namespace KiBoards.Managment
 
         public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, string spaceId) => await ImportSavedObjectsAsync(ndjsonFile, spaceId, false, CancellationToken.None);
         public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, string spaceId, CancellationToken cancellationToken) => await ImportSavedObjectsAsync(ndjsonFile, spaceId, false, cancellationToken);
+        public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, CancellationToken cancellationToken) => await ImportSavedObjectsAsync(ndjsonFile, null, false, cancellationToken);
+        public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile) => await ImportSavedObjectsAsync(ndjsonFile, null, false, CancellationToken.None);
         public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, string spaceId, bool overwrite, CancellationToken cancellationToken)
         {
             var multipartContent = new MultipartFormDataContent();
