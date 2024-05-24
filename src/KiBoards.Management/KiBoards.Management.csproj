@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<BaseOutputPath>..\..\bin</BaseOutputPath>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+		<Nullable>disable</Nullable>
 		<LangVersion>10</LangVersion>
 	</PropertyGroup>
 
@@ -28,9 +28,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\..\icon.png" Pack="true" PackagePath=""/>
+		<None Include="..\..\icon.png" Pack="true" PackagePath="" />
 		<None Include="..\..\LICENSE" Pack="true" PackagePath="" />
-		<None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -38,5 +38,6 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
 	</ItemGroup>
 </Project>
