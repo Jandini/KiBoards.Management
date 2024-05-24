@@ -21,7 +21,7 @@
 		<PackageId>KiBoards.Management</PackageId>
 		<AssemblyName>KiBoards.Management</AssemblyName>
 		<RootNamespace>KiBoards.Management</RootNamespace>
-		<Description>KiBoards.Management</Description>
+		<Description>Library for managing Kibana settings and saved objects.</Description>
 		<PackageTags>KiBoards.Management</PackageTags>
 		<RepositoryUrl>https://github.com/Jandini/KiBoards.Management</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/Jandini/KiBoards.Management</PackageProjectUrl>
