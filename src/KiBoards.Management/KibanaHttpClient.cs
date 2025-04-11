@@ -17,6 +17,23 @@ namespace KiBoards.Managment
         private string GetSpaceBaseUrl(string spaceId) => !string.IsNullOrEmpty(spaceId) ? $"/s/{spaceId.ToLower()}" : string.Empty;
 
 
+
+        /// <summary>
+        /// Set Kibana theme for default space.
+        /// </summary>
+        /// <param name="darkMode"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task SetDarkModeAsync(bool darkMode, CancellationToken cancellationToken) => await SetDarkModeAsync(darkMode, cancellationToken)
+        
+
+        /// <summary>
+        /// Set Kibana theme for given space id
+        /// </summary>
+        /// <param name="darkMode"></param>
+        /// <param name="spaceId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task SetDarkModeAsync(bool darkMode, string spaceId, CancellationToken cancellationToken)
         {
             var content = JsonContent.Create(new KibanaSettingsRequest() 
