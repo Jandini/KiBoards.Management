@@ -4,6 +4,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 using Serilog;
+using KiBoards.Managment;
 internal static class Extensions
 {
     internal static void LogVersion<T>(this IServiceProvider provider) => provider
@@ -64,7 +65,8 @@ internal static class Extensions
 
     internal static IServiceCollection AddServices(this IServiceCollection services)
     {
-        
+        services.AddHttpClient<KibanaHttpClient>(client => client.BaseAddress = new Uri("http://localhost:5601"));
+
         return services
             // Add services here
             .AddTransient<Main>();

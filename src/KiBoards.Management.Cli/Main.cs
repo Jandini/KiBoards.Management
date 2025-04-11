@@ -1,10 +1,13 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using KiBoards.Managment;
+using Microsoft.Extensions.Logging;
 
-internal class Main(ILogger<Main> logger) 
+internal class Main(ILogger<Main> logger, KibanaHttpClient kibanaHttpClient) 
 {
     public async Task RunAsync(CancellationToken cancellationToken = default)
     {
-        logger.LogInformation("Hello World!");
-        await Task.CompletedTask;
+        logger.LogInformation("Making kibana dark");
+        await kibanaHttpClient.SetDarkModeAsync(false, null, cancellationToken);
+        
+        
     }
 }
