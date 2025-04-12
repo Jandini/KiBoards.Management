@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System.Reflection;
 using Serilog;
 using KiBoards.Management;
+
 internal static class Extensions
 {
     internal static void LogVersion<T>(this IServiceProvider provider) => provider

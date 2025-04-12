@@ -1,10 +1,9 @@
-﻿namespace KiBoards.Management
+﻿namespace KiBoards.Management;
+
+public class KibanaVersion
 {
-    public class KibanaVersion
-    {
-        public string Number { get; set; }
-        public string BuildHash { get; set; }
-        public int BuildNumber { get; set; }
-        public bool BuildSnapshot { get; set; }
-    }
+    public string Number { get; set; }
+    public string BuildHash { get; set; }
+    public int BuildNumber { get; set; }
+    public bool BuildSnapshot { get; set; }
 }

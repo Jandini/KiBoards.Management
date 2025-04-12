@@ -1,7 +1,6 @@
-﻿namespace KiBoards.Management
+﻿namespace KiBoards.Management;
+
+class KibanaSettingsRequest
 {
-    class KibanaSettingsRequest
-    {
-        public KibanaSettingsChanges Changes { get; set; }
-    }
+    public KibanaSettingsChanges Changes { get; set; }
 }

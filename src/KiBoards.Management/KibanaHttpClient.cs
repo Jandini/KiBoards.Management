@@ -2,6 +2,7 @@
 using System.Text.Json;
 
 namespace KiBoards.Management;
+
 public class KibanaHttpClient 
 {
     private readonly HttpClient _httpClient;

@@ -1,7 +1,6 @@
-﻿namespace KiBoards.Management
+﻿namespace KiBoards.Management;
+
+public class KibanaStatus
 {
-    public class KibanaStatus
-    {
-        public KibanaStatusOverall Overall { get; set; }
-    }
+    public KibanaStatusOverall Overall { get; set; }
 }

@@ -1,14 +1,13 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace KiBoards.Management
+namespace KiBoards.Management;
+
+public class KibanaSettingsChanges
 {
-    public class KibanaSettingsChanges
-    {
-        [JsonPropertyName("theme:darkMode")]
-        public bool? ThemeDarkMode { get; set; } = null;
+    [JsonPropertyName("theme:darkMode")]
+    public bool? ThemeDarkMode { get; set; } = null;
 
-        [JsonPropertyName("defaultRoute")]
-        public string DefaultRoute { get; set; } = null;
+    [JsonPropertyName("defaultRoute")]
+    public string DefaultRoute { get; set; } = null;
 
-    }
 }
