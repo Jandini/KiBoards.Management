@@ -9,6 +9,8 @@ namespace KiBoards.Management;
 public class KibanaHttpClient 
 {
     private readonly HttpClient _httpClient;
+    private readonly JsonSerializerOptions _jsonPropertyNameCaseInsensitive = new() { PropertyNameCaseInsensitive = true };
+    private readonly JsonSerializerOptions _jsonCamelCasePropertyNamingPolicy = new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
     public KibanaHttpClient(HttpClient httpClinet)
     {
@@ -70,7 +72,7 @@ public class KibanaHttpClient
         var response = await _httpClient.PostAsync($"{GetSpaceBaseUrl(spaceId)}/api/saved_objects/_import?overwrite={overwrite.ToString().ToLower()}", multipartContent);
 
         response.EnsureSuccessStatusCode();
-        var result = await response.Content.ReadFromJsonAsync<KibanaImportObjectsResponse>(new JsonSerializerOptions() { PropertyNameCaseInsensitive = true }, cancellationToken);
+        var result = await response.Content.ReadFromJsonAsync<KibanaImportObjectsResponse>(_jsonPropertyNameCaseInsensitive, cancellationToken);
 
         return result;
     }
@@ -79,10 +81,10 @@ public class KibanaHttpClient
 
     public async Task<bool> TryCreateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
     {
-        var response = await _httpClient.PostAsJsonAsync("api/spaces/space", space, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }, cancellationToken );
+        var response = await _httpClient.PostAsJsonAsync("api/spaces/space", space, _jsonCamelCasePropertyNamingPolicy, cancellationToken );
         return response.IsSuccessStatusCode;
     }
 
     public async Task<KibanaSpace> GetSpaceAsync(string spaceId, CancellationToken cancellationToken = default) 
-        => await _httpClient.GetFromJsonAsync<KibanaSpace>($"api/spaces/space/{spaceId}", new JsonSerializerOptions() { PropertyNameCaseInsensitive = true }, cancellationToken);
+        => await _httpClient.GetFromJsonAsync<KibanaSpace>($"api/spaces/space/{spaceId}", _jsonPropertyNameCaseInsensitive, cancellationToken);
 }
