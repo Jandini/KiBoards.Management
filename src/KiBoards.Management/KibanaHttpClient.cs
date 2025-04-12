@@ -29,7 +29,13 @@ public class KibanaHttpClient
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async Task SetDarkModeAsync(bool darkMode, CancellationToken cancellationToken = default) => await SetDarkModeAsync(darkMode, null, cancellationToken);
-    
+
+
+
+    private JsonContent GetSettingsChangeJsonContent<T>(T changes) where T : class => JsonContent.Create(new KibanaSettingsRequest<T>()
+    {
+        Changes = changes
+    });
 
     /// <summary>
     /// Set Kibana theme for given space id
@@ -40,14 +46,7 @@ public class KibanaHttpClient
     /// <returns></returns>
     public async Task SetDarkModeAsync(bool darkMode, string spaceId, CancellationToken cancellationToken = default)
     {
-        var content = JsonContent.Create(new KibanaSettingsRequest() 
-        { 
-            Changes = new KibanaSettingsChanges() 
-            { 
-                ThemeDarkMode = darkMode 
-            } 
-        });
-
+        var content = GetSettingsChangeJsonContent(new KibanaSettingsDarkMode() { ThemeDarkMode = darkMode });
         var response = await _httpClient.PostAsync($"{GetSpaceBaseUrl(spaceId)}/api/kibana/settings", content, cancellationToken);
         response.EnsureSuccessStatusCode();
     }
@@ -55,7 +54,7 @@ public class KibanaHttpClient
 
     public async Task<bool> TrySetDefaultRoute(string defaultRoute, string spaceId, CancellationToken cancellationToken = default)
     {
-        var content = JsonContent.Create(new KibanaSettingsRequest() { Changes = new KibanaSettingsChanges() { DefaultRoute = defaultRoute } });
+        var content = GetSettingsChangeJsonContent(new KibanaSettingsDefaultRoute() { DefaultRoute = defaultRoute });
         var response = await _httpClient.PostAsync($"{GetSpaceBaseUrl(spaceId)}/api/kibana/settings", content, cancellationToken);
         return response.IsSuccessStatusCode;
     }

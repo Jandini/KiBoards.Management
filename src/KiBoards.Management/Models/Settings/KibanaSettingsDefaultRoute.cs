@@ -2,10 +2,8 @@
 
 namespace KiBoards.Management.Models.Settings;
 
-public class KibanaSettingsChanges
+internal class KibanaSettingsDefaultRoute
 {
-    [JsonPropertyName("theme:darkMode")]
-    public bool? ThemeDarkMode { get; set; } = null;
 
     [JsonPropertyName("defaultRoute")]
     public string DefaultRoute { get; set; } = null;

@@ -1,6 +1,6 @@
 ﻿namespace KiBoards.Management.Models.Settings;
 
-class KibanaSettingsRequest
+internal class KibanaSettingsRequest<T> where T : class
 {
-    public KibanaSettingsChanges Changes { get; set; }
+    public T Changes { get; set; }
 }
