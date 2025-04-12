@@ -1,4 +1,6 @@
-﻿namespace KiBoards.Management;
+﻿using KiBoards.Management.Models.Status;
+
+namespace KiBoards.Management;
 
 public class KibanaStatusResponse
 {

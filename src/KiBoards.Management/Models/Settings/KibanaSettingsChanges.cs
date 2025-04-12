@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace KiBoards.Management;
+namespace KiBoards.Management.Models.Settings;
 
 public class KibanaSettingsChanges
 {

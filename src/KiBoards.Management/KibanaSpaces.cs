@@ -1,4 +1,6 @@
-﻿namespace KiBoards.Management;
+﻿using KiBoards.Management.Models.Spaces;
+
+namespace KiBoards.Management;
 
 public class KibanaSpaces
 {

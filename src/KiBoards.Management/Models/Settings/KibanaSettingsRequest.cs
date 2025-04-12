@@ -1,4 +1,4 @@
-﻿namespace KiBoards.Management;
+﻿namespace KiBoards.Management.Models.Settings;
 
 class KibanaSettingsRequest
 {
