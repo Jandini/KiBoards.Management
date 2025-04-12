@@ -9,7 +9,7 @@ namespace KiBoards.Management;
 public class KibanaHttpClient 
 {
     private readonly HttpClient _httpClient;
-    
+
     public KibanaHttpClient(HttpClient httpClinet)
     {
         _httpClient = httpClinet;    
@@ -59,9 +59,9 @@ public class KibanaHttpClient
     }
 
 
-    public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, string spaceId, CancellationToken cancellationToken = default) => await ImportSavedObjectsAsync(ndjsonFile, spaceId, false, cancellationToken);
-    public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, CancellationToken cancellationToken = default) => await ImportSavedObjectsAsync(ndjsonFile, null, false, cancellationToken);
-    public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, string spaceId, bool overwrite, CancellationToken cancellationToken = default)
+    public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, CancellationToken cancellationToken = default) => await ImportSavedObjectsAsync(ndjsonFile, false, null, cancellationToken);
+    public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, string spaceId, CancellationToken cancellationToken = default) => await ImportSavedObjectsAsync(ndjsonFile, false, spaceId, cancellationToken);
+    public async Task<KibanaImportObjectsResponse> ImportSavedObjectsAsync(string ndjsonFile, bool overwrite, string spaceId = null, CancellationToken cancellationToken = default)
     {
         var multipartContent = new MultipartFormDataContent();
         var streamContent = new StreamContent(File.Open(ndjsonFile, FileMode.Open));
@@ -75,8 +75,7 @@ public class KibanaHttpClient
         return result;
     }
 
-    public async Task<KibanaStatusResponse> GetStatus() => await GetStatus(CancellationToken.None);
-    public async Task<KibanaStatusResponse> GetStatus(CancellationToken cancellationToken) => await _httpClient.GetFromJsonAsync<KibanaStatusResponse>("api/status", cancellationToken);
+    public async Task<KibanaStatusResponse> GetStatus(CancellationToken cancellationToken = default) => await _httpClient.GetFromJsonAsync<KibanaStatusResponse>("api/status", cancellationToken);
 
     public async Task<bool> TryCreateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
     {
@@ -84,5 +83,6 @@ public class KibanaHttpClient
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<KibanaSpace> GetSpaceAsync(string id, CancellationToken cancellationToken = default) => await _httpClient.GetFromJsonAsync<KibanaSpace>($"api/spaces/space/{id}", new JsonSerializerOptions() { PropertyNameCaseInsensitive = true }, cancellationToken);
+    public async Task<KibanaSpace> GetSpaceAsync(string spaceId, CancellationToken cancellationToken = default) 
+        => await _httpClient.GetFromJsonAsync<KibanaSpace>($"api/spaces/space/{spaceId}", new JsonSerializerOptions() { PropertyNameCaseInsensitive = true }, cancellationToken);
 }
