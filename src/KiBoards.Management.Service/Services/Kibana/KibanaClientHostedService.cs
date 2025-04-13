@@ -1,7 +1,4 @@
-﻿
-using KiBoards.Managment;
-
-namespace KiBoards.Management.Service.Services.Kibana
+﻿namespace KiBoards.Management.Service.Services.Kibana
 {
     public class KibanaClientHostedService : BackgroundService
     {

@@ -7,8 +7,8 @@ using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Serilog.Sinks.Elasticsearch;
 using System.Text.RegularExpressions;
-using KiBoards.Managment;
 using KiBoards.Management.Service.Services.Kibana;
+using KiBoards.Management;
 
 // Create web application builder
 var builder = WebApplication.CreateBuilder(args);
