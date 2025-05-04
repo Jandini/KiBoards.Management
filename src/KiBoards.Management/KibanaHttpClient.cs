@@ -134,7 +134,7 @@ public class KibanaHttpClient
     }
 
     public async Task<HttpResponseMessage> UpdateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
-        => await _httpClient.PostAsJsonAsync($"api/spaces/space/{space.Id}", space, _jsonCamelCasePropertyNamingPolicy, cancellationToken);
+        => await _httpClient.PutAsJsonAsync($"api/spaces/space/{space.Id}", space, _jsonCamelCasePropertyNamingPolicy, cancellationToken);
 
 
     /// <summary>
