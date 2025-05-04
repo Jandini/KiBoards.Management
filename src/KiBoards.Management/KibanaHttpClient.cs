@@ -124,7 +124,18 @@ public class KibanaHttpClient
 
     public async Task<HttpResponseMessage> CreateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
         => await _httpClient.PostAsJsonAsync("api/spaces/space", space, _jsonCamelCasePropertyNamingPolicy, cancellationToken);
-           
+
+
+
+    public async Task<bool> TryUpdateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
+    {
+        var response = await UpdateSpaceAsync(space, cancellationToken);
+        return response.IsSuccessStatusCode;
+    }
+
+    public async Task<HttpResponseMessage> UpdateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
+        => await _httpClient.PostAsJsonAsync($"api/spaces/space/{space.Id}", space, _jsonCamelCasePropertyNamingPolicy, cancellationToken);
+
 
     /// <summary>
     /// Retrieves information about a specific Kibana space.
