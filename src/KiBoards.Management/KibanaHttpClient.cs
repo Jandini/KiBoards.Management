@@ -50,10 +50,16 @@ public class KibanaHttpClient
     /// <returns>True if the request succeeded; otherwise, false.</returns>
     public async Task<bool> TrySetDefaultRoute(string defaultRoute, string spaceId, CancellationToken cancellationToken = default)
     {
-        var content = GetSettingsChangeJsonContent(new KibanaSettingsDefaultRoute() { DefaultRoute = defaultRoute });
-        var response = await _httpClient.PostAsync($"{GetSpaceBaseUrl(spaceId)}/api/kibana/settings", content, cancellationToken);
+        var response = await SetDefaultRoute(defaultRoute, spaceId, cancellationToken);
         return response.IsSuccessStatusCode;
     }
+
+    public async Task<HttpResponseMessage> SetDefaultRoute(string defaultRoute, string spaceId, CancellationToken cancellationToken = default)
+    {
+        var content = GetSettingsChangeJsonContent(new KibanaSettingsDefaultRoute() { DefaultRoute = defaultRoute });
+        return await _httpClient.PostAsync($"{GetSpaceBaseUrl(spaceId)}/api/kibana/settings", content, cancellationToken);
+    }
+
 
     /// <summary>
     /// Imports saved objects from an NDJSON file into the default Kibana space.
@@ -112,9 +118,24 @@ public class KibanaHttpClient
     /// <returns>True if the space was successfully created; otherwise, false.</returns>
     public async Task<bool> TryCreateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
     {
-        var response = await _httpClient.PostAsJsonAsync("api/spaces/space", space, _jsonCamelCasePropertyNamingPolicy, cancellationToken);
+        var response = await CreateSpaceAsync(space, cancellationToken);
         return response.IsSuccessStatusCode;
     }
+
+    public async Task<HttpResponseMessage> CreateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
+        => await _httpClient.PostAsJsonAsync("api/spaces/space", space, _jsonCamelCasePropertyNamingPolicy, cancellationToken);
+
+
+
+    public async Task<bool> TryUpdateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
+    {
+        var response = await UpdateSpaceAsync(space, cancellationToken);
+        return response.IsSuccessStatusCode;
+    }
+
+    public async Task<HttpResponseMessage> UpdateSpaceAsync(KibanaSpace space, CancellationToken cancellationToken = default)
+        => await _httpClient.PostAsJsonAsync($"api/spaces/space/{space.Id}", space, _jsonCamelCasePropertyNamingPolicy, cancellationToken);
+
 
     /// <summary>
     /// Retrieves information about a specific Kibana space.
